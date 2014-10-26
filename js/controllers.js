@@ -1,46 +1,49 @@
 'use strict';
 
 /* Controllers */
-
 var bankFriendsControllers = angular.module('bankFriendsControllers', []);
+bankFriendsControllers.controller("navCtrl", [
+	function(){
 
-bankFriendsControllers.controller('bankFriendsCtrl', ['$scope', '$filter', 'FriendsService','client',
-  function($scope, $filter, FriendsService, client) {
-    
+}]);
+
+//setup the bankFriendsCtrl controller (the homepage one)
+bankFriendsControllers.controller('bankFriendsCtrl', ['$scope', '$filter', 'client',
+  function($scope, $filter, client) {
+  	//search the index for all males
     client.search({
         index: 'people',
         type: 'person',
-        q: 'gender:male',
+        //this is the standard ES search api
+        body:
+        {
+          "query" : {
+          "match_all" : {}
+        }}, 
         searchType: 'query_and_fetch'
       }, function (error, response) {
-      		if (error) {
-			    		console	.error(JSON.stringify(error));
-			    	
-			  		} else {
-			    		console.log('response: ' + JSON.stringify(response));	
-			    		 $scope.friends = response.hits.hits;
-			  		} 
-
-
-            // ...
-    //$scope.orderProp = 'age';
+      	if (error) {
+			console	.error(JSON.stringify(error));
+		} else {
+			console.log('response: ' + JSON.stringify(response));	
+			$scope.friends = response.hits.hits;
+		} 
 	});
-
-
+    //get the orderby function from the filter
     var orderBy = $filter('orderBy');
+    //create an ordering function, attach to the scope
     $scope.order = function(predicate, reverse) {
       $scope.friends = orderBy($scope.friends, predicate, reverse);
     };
-  //  $scope.order('-age',false);
-      $scope.insert =function(){
-      	$scope.friends.forEach(function(entry) {
-        	console.log( JSON.stringify(entry));
+    //create an jsonify function (this will log all objects as json strings)
+     $scope.jsonify =function(){
+   		$scope.friends.forEach(function(entry) {
+        console.log( JSON.stringify(entry));
 		});	
       };
       
+      //create a ping function to contact the ES server
       $scope.ping = function(){
-		
-
       	client.ping({
   			requestTimeout: 1000,
   			// undocumented params are appended to the query string
@@ -53,14 +56,13 @@ bankFriendsControllers.controller('bankFriendsCtrl', ['$scope', '$filter', 'Frie
   		}
 		});
       };
-
+      //create function - to take the current items in scope and insert into
+      //the ES database
       $scope.create = function(){
       	var errored = false;
 			$scope.friends.forEach(function(entry) {
-				if (errored)
-				{
+				if (errored) {
 					return;
-
 				}
 				entry.id = null,
 	      		client.index({
@@ -69,7 +71,7 @@ bankFriendsControllers.controller('bankFriendsCtrl', ['$scope', '$filter', 'Frie
 		      		body : JSON.stringify(entry)
 			    },function (error,response) {
 			  		if (error) {
-			    		console	.error(error);
+			    		console.error(error);
 			    		errored = true;
 			  		} else {
 			    		console.log('response: ' + JSON.stringify(response));	
