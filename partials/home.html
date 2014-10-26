@@ -1,0 +1,19 @@
+<table>
+ 
+<tr><th>Thumb</th>
+<th><a href="" ng-click="reverse=!reverse;order('name', reverse)">Name</a></th>
+<th><a href="" ng-click="reverse=!reverse;order('balance',reverse)">Balance</a></th>
+<th><a href="" ng-click="reverse=!reverse;order('age',reverse)">Age</a></th>
+<th><a href="" ng-click="reverse=!reverse;order('gender',reverse)">Gender</a></th>
+<th><a href="" ng-click="reverse=!reverse;order('registered',reverse)">Registered date</a></th>
+</tr>
+ <tr ng-repeat="friend in friends | filter:query | orderBy:orderProp" >
+ <td class="thumb"><img ng-src="{{friend._source.picture}}" /></td>
+
+ <td>{{friend._source.name}}</td>
+ <td>{{friend._source.balance}}</td>
+ <td>{{friend._source.age}}</td>
+ <td>{{friend._source.gender}}</td>
+ <td>{{friend._source.registered}}</td>
+ </tr>
+ </table>
