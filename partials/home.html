@@ -14,7 +14,7 @@
 	<th><a href="" ng-click="reverse=!reverse;order('_source.registered',reverse)">Registered date</a></th>
 </tr>
  <tr ng-repeat="friend in friends | filter:query | orderBy:orderProp" >
- <td class="thumb"><img class="img-thumbnail" ng-src="{{friend._source.picture}}" /></td>
+ <td class="thumb"><i class="glyphicon glyphicon-user"/></td>
 
  <td><a href="#/friend/{{friend._id}}">{{friend._source.name}}</a></td>
  <td>{{friend._source.balance}}</td>

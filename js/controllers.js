@@ -20,7 +20,7 @@ bankFriendsControllers.controller('bankFriendsCtrl', ['$scope', '$filter', 'clie
           "query" : {
           "match_all" : {}
         }},
-        size: 50
+        size: 800
       }, function (error, response) {
       	if (error) {
 			console	.error(JSON.stringify(error));
@@ -67,7 +67,7 @@ bankFriendsControllers.controller('bankFriendsCtrl', ['$scope', '$filter', 'clie
         type: 'person',
         //this is the standard ES search api
         q: query,
-        size: 50
+        size: 800
       }, function (error, response) {
         if (error) {
       console .error(JSON.stringify(error));

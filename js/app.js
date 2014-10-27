@@ -9,7 +9,10 @@ var bankFriendsApp = angular.module('bankFriendsApp', [
   'ngRoute',
   'bankFriendsControllers',
   'bankFriendsServices',
-  'elasticsearch'
+  'elasticsearch',
+  'ui.bootstrap',
+  'ngCookies',
+  'angular-loading-bar'
 ]);
 
 //configure the routing

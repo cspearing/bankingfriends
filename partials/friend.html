@@ -1,68 +1,57 @@
-<div>
+<div> <!-- partial -->
 
 <div class="row page-header" >
-<div class="col-md-2 thumbnail"><img ng-src="{{friend._source.picture}}" /> </div>
-
-<div class="col-md-8">
-<h1>{{friend._source.name}}</h1>
-</div>
-<div class="col-md-2">
-<h1><small>{{friend._source.balance}}</small></h1>
-</div>
-</div>
+	<div class="col-md-2 thumbnail">
+		<img ng-src="{{friend._source.picture}}" />
+	</div>
+	<div class="col-md-8">
+		<h1>{{friend._source.name}}</h1>
+	</div>
+	<div class="col-md-2">
+		<h1><small>{{friend._source.balance}}</small></h1>
+	</div>
+</div> <!-- end row -->
 <div class="row">
-<div class="col-md-2">
-<p>Works at <strong>{{friend._source.company}}</strong></p>
-</div>
-<div class="col-md-10">
-<p class="lead">{{friend._source.greeting}}</p>
- </div>
-</div>
+	<div class="col-md-2">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h5 ng-click="addressCollapsed = !addressCollapsed">Address 
+					<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !addressCollapsed, 'glyphicon-chevron-right': addressCollapsed}"></i>
+				</h5>
+			</div><!-- end panel-heading -->
+			<div class="panel-body" collapse="addressCollapsed">
+				<address>{{friend._source.address}}</address>
+		 	</div> <!-- end panel-body -->
+		 </div> <!--end panel-->
+		  <div class="panel panel-info">
+		  <div class="panel-heading">
+				<h5 ng-click="detailsCollapsed = !detailsCollapsed">Details 
+					<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !detailsCollapsed, 'glyphicon-chevron-right': detailsCollapsed}"></i>
+				</h5>
+			</div><!-- end panel-heading -->
+			<div class="panel-body" collapse="detailsCollapsed">
+			<p>Works at <strong>{{friend._source.company}}</strong></p>
+		 <p>Age: {{friend._source.age}}</p>
+		 <p>Gender: {{friend._source.gender}}</p>
+		 <p>Registered: {{friend._source.registered}}</p>
+		 <p>Friends: {{friend._source.friends.length}}</p>
+		 </div>
+		</div>	<!-- end panel-->
+	</div> <!-- end col-md-2 -->
+
+
+	<div class="col-md-10">
+	 <tabset type="pills">
+    <tab heading="Main"> {{friend._source.greeting}}</tab>
+    <tab >
+      <tab-heading>Notes</tab-heading>
+      {{friend._source.about}}
+    </tab>
+  </tabset>
+
+	 </div><!-- end col-md-10-->
+</div><!-- end row-->
 <div class="row">
-<div class="col-md-2">
-<div class="panel panel-primary">
-<div class="panel-heading"><h5>Address</h5></div>
-<div class="panel-body"><address>
- {{friend._source.address}}
- </address>
- </div>
- </div>
-</div>
-<div class="col-md-10">
- <p>{{friend._source.about}}</p>
- </div>
- </div>
- <div class="row">
-<div class="col-md-2">
-
- Age: {{friend._source.age}}
-
-</div>
-<div class="col-md-4">
- </div>
- </div>
- <div class="row">
-<div class="col-md-2">Gender: 
- {{friend._source.gender}}</div>
-<div class="col-md-4"></h1>
- </div>
- </div>
- <div class="row">
-<div class="col-md-2">
- Registered: {{friend._source.registered}}
- </div>
-<div class="col-md-4">
- </div>
- </div>
- <div class="row">
-<div class="col-md-2">
- Friends: {{friend._source.friends.length}}
-</div>
-
- </div>
- <div class="row">
-<div class="col-md-2"></div>
-
-</div>
-<p></p>
-</div>
+		  	
+</div><!-- end row-->
+ </div> <!-- end partial -->
