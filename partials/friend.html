@@ -13,7 +13,7 @@
 </div> <!-- end row -->
 <div class="row">
 	<div class="col-md-2">
-		<div class="panel panel-primary">
+		<div draggable class="panel panel-primary">
 			<div class="panel-heading">
 				<h5 ng-click="addressCollapsed = !addressCollapsed">Address 
 					<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !addressCollapsed, 'glyphicon-chevron-right': addressCollapsed}"></i>
@@ -23,7 +23,7 @@
 				<address>{{friend._source.address}}</address>
 		 	</div> <!-- end panel-body -->
 		 </div> <!--end panel-->
-		  <div class="panel panel-info">
+		  <div draggable class="panel panel-info">
 		  <div class="panel-heading">
 				<h5 ng-click="detailsCollapsed = !detailsCollapsed">Details 
 					<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !detailsCollapsed, 'glyphicon-chevron-right': detailsCollapsed}"></i>
