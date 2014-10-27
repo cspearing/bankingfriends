@@ -23,6 +23,9 @@ bankFriendsApp.config(['$routeProvider',
        when('/about', {
         templateUrl: 'partials/about.html'
       }).
+       when('/contact', {
+        templateUrl: 'partials/contact.html'
+      }).
       when('/friend/:friendId', {
         templateUrl: 'partials/friend.html',
         controller: 'bankFriendCtrl'
