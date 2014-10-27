@@ -19,20 +19,25 @@ bankFriendsControllers.controller('bankFriendsCtrl', ['$scope', '$filter', 'clie
         {
           "query" : {
           "match_all" : {}
-        }}, 
-        searchType: 'query_and_fetch'
+        }},
+        size: 50
       }, function (error, response) {
       	if (error) {
 			console	.error(JSON.stringify(error));
 		} else {
 			console.log('response: ' + JSON.stringify(response));	
 			$scope.friends = response.hits.hits;
+      $scope.results = response.hits.total;
 		} 
 	});
     //get the orderby function from the filter
     var orderBy = $filter('orderBy');
+    var predicate = "";
+    var reverse = false;
     //create an ordering function, attach to the scope
-    $scope.order = function(predicate, reverse) {
+    $scope.order = function(pred, rev) {
+      predicate = pred;
+      reverse = rev;
       $scope.friends = orderBy($scope.friends, predicate, reverse);
     };
     //create an jsonify function (this will log all objects as json strings)
@@ -56,6 +61,24 @@ bankFriendsControllers.controller('bankFriendsCtrl', ['$scope', '$filter', 'clie
   		}
 		});
       };
+      $scope.search = function(query){
+        client.search({
+        index: 'people',
+        type: 'person',
+        //this is the standard ES search api
+        q: query,
+        size: 50
+      }, function (error, response) {
+        if (error) {
+      console .error(JSON.stringify(error));
+    } else {
+      console.log('response: ' + JSON.stringify(response)); 
+      $scope.friends = orderBy(response.hits.hits, predicate, reverse);
+      $scope.results = response.hits.total;
+    } 
+  });
+      };
+
       //create function - to take the current items in scope and insert into
       //the ES database
       $scope.create = function(){
